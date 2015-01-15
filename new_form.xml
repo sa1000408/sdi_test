@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Plant_Test</h:title>
+    <model>
+      <instance>
+        <new_form id="new_form">
+          <What_kind_of_Plant_did_you_see/>
+          <Plant_Name/>
+          <Scientific_Name_Cactus/>
+          <Common_Name_Flower/>
+          <Epiphyte/>
+          <Blossom/>
+          <Position/>
+          <Picture/>
+          <Time/>
+          <Notes/>
+          <start/>
+          <end/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </new_form>
+      </instance>
+      <bind nodeset="/new_form/What_kind_of_Plant_did_you_see" required="true()" type="select1"/>
+      <bind nodeset="/new_form/Plant_Name" relevant=" /new_form/What_kind_of_Plant_did_you_see  = 'AUTOMATIC'" required="true()" type="select1"/>
+      <bind nodeset="/new_form/Scientific_Name_Cactus" relevant=" /new_form/What_kind_of_Plant_did_you_see  = 'AUTOMATIC'" required="true()" type="select1"/>
+      <bind nodeset="/new_form/Common_Name_Flower" relevant=" /new_form/What_kind_of_Plant_did_you_see  = 'flower'" required="true()" type="select1"/>
+      <bind nodeset="/new_form/Epiphyte" required="true()" type="select1"/>
+      <bind nodeset="/new_form/Blossom" required="true()" type="select1"/>
+      <bind nodeset="/new_form/Position" required="false()" type="geopoint"/>
+      <bind nodeset="/new_form/Picture" required="false()" type="binary"/>
+      <bind nodeset="/new_form/Time" required="true()" type="dateTime"/>
+      <bind nodeset="/new_form/Notes" readonly="true()" required="false()" type="string"/>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/new_form/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/new_form/end" type="dateTime"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/new_form/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <select1 ref="/new_form/What_kind_of_Plant_did_you_see">
+      <label>What kind of Plant did you see?</label>
+      <item>
+        <label>Catus</label>
+        <value>AUTOMATIC</value>
+      </item>
+      <item>
+        <label>Flower</label>
+        <value>flower</value>
+      </item>
+      <item>
+        <label>Gras</label>
+        <value>gras</value>
+      </item>
+      <item>
+        <label>Shrub</label>
+        <value>shrub</value>
+      </item>
+      <item>
+        <label>Tree</label>
+        <value>AUTOMATIC_1</value>
+      </item>
+    </select1>
+    <select1 ref="/new_form/Plant_Name">
+      <label>Common Name Cactus</label>
+      <item>
+        <label>Prickly Pear Cactus</label>
+        <value>prickly_pear_cactus</value>
+      </item>
+      <item>
+        <label>Lava cactus</label>
+        <value>lava_cactus</value>
+      </item>
+      <item>
+        <label>Opuntia</label>
+        <value>opuntia</value>
+      </item>
+      <item>
+        <label>Jasminocereus</label>
+        <value>jasminocereus</value>
+      </item>
+      <item>
+        <label>Option 5</label>
+        <value>option_5</value>
+      </item>
+    </select1>
+    <select1 ref="/new_form/Scientific_Name_Cactus">
+      <label>Scientific Name Cactus</label>
+      <item>
+        <label>Opuntia Litorallis</label>
+        <value>opuntia_litora</value>
+      </item>
+      <item>
+        <label>Brachycereus nesioticus</label>
+        <value>brachycereus_n</value>
+      </item>
+      <item>
+        <label>Opuntia echios</label>
+        <value>opuntia_echios</value>
+      </item>
+      <item>
+        <label>Opuntia galapageia</label>
+        <value>opuntia_galapa</value>
+      </item>
+      <item>
+        <label>Jasminocereus thouarsii</label>
+        <value>jasminocereus_</value>
+      </item>
+    </select1>
+    <select1 ref="/new_form/Common_Name_Flower">
+      <label>Common Name Flower</label>
+      <item>
+        <label>Justicia</label>
+        <value>justicia</value>
+      </item>
+      <item>
+        <label>Ambrosia</label>
+        <value>ambrosia</value>
+      </item>
+      <item>
+        <label>Galápagos tillandsia</label>
+        <value>galpagos_tilla</value>
+      </item>
+      <item>
+        <label>littlebell /Aiea morning glory</label>
+        <value>littlebell_aie</value>
+      </item>
+      <item>
+        <label>creeping beggarweed</label>
+        <value>creeping_begga</value>
+      </item>
+    </select1>
+    <select1 ref="/new_form/Epiphyte">
+      <label>Epiphyte</label>
+      <item>
+        <label>Yes</label>
+        <value>yes</value>
+      </item>
+      <item>
+        <label>No</label>
+        <value>no</value>
+      </item>
+    </select1>
+    <select1 ref="/new_form/Blossom">
+      <label>Blossom</label>
+      <item>
+        <label>Yes</label>
+        <value>yes</value>
+      </item>
+      <item>
+        <label>No</label>
+        <value>no</value>
+      </item>
+    </select1>
+    <input ref="/new_form/Position">
+      <label>Position</label>
+      <hint>GPS coordinates can only be collected when outside.</hint>
+    </input>
+    <upload mediatype="image/*" ref="/new_form/Picture">
+      <label>Picture</label>
+    </upload>
+    <input ref="/new_form/Time">
+      <label>Time</label>
+    </input>
+    <input ref="/new_form/Notes">
+      <label>Notes</label>
+    </input>
+  </h:body>
+</h:html>
